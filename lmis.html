@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LMIS - Learner Management System</title>
+    <link rel="stylesheet" href="lmis.css">
+</head>
+<body>
+    <header>
+        <h1>Learner Management Information System</h1>
+    </header>
+    
+    <main>
+        <section id="student-section">
+            <h2>Student Enrollment</h2>
+            <input type="text" id="student-name" placeholder="Enter student name">
+            <button onclick="addStudent()">Add Student</button>
+            <ul id="student-list"></ul>
+        </section>
+
+        <section id="course-section">
+            <h2>Course Management</h2>
+            <input type="text" id="course-name" placeholder="Enter course name">
+            <button onclick="addCourse()">Add Course</button>
+            <ul id="course-list"></ul>
+        </section>
+
+        <section id="grades-section">
+            <h2>Grade Tracking</h2>
+            <select id="student-select"></select>
+            <select id="course-select"></select>
+            <input type="number" id="grade-input" placeholder="Enter grade">
+            <button onclick="assignGrade()">Assign Grade</button>
+            <ul id="grades-list"></ul>
+        </section>
+    </main>
+
+    <script src="lmis.js"></script>
+</body>
+</html>
