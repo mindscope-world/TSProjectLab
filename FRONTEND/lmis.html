@@ -28,7 +28,9 @@
     <main>
         <section id="student-section">
             <h2>Student Enrollment</h2>
-            <input type="text" id="student-name" placeholder="Enter student name">
+            <input type="text" id="student-name" placeholder="Enter Student Name">
+            <input type="text" id="student-name" placeholder="Enter Student Email">
+            <input type="text" id="student-name" placeholder="Enter Student Phone Number">
             <button onclick="addStudent()">Add Student</button>
             <ul id="student-list"></ul>
         </section>
@@ -36,6 +38,12 @@
         <section id="course-section">
             <h2>Course Management</h2>
             <input type="text" id="course-name" placeholder="Enter course name">
+            <p>Or select below</p>
+            <select id="dropdown" name="options">
+                <option value="option1">TypeScript Basics </option>
+                <option value="option2">Node.js Fundamentals</option>
+                <option value="option3">Next.js Crash Course</option>
+              </select>
             <button onclick="addCourse()">Add Course</button>
             <ul id="course-list"></ul>
         </section>
