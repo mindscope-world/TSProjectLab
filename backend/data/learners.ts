@@ -1,6 +1,18 @@
-// src/data/learners.ts
+/**
+ * data/learners.ts
+ * 
+ * This file contains mock data for learners in the application.
+ * In a production environment, this would typically be replaced with a database connection.
+ */
+
 import { Learner } from '../models/learner';
 
+/**
+ * Sample learner data array
+ * 
+ * This array contains mock data for testing and development purposes.
+ * Each object follows the Learner interface structure.
+ */
 export const learners: Learner[] = [
   {
     id: 1,

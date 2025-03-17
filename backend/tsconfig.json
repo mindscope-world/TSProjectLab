@@ -1,18 +1,27 @@
-// tsconfig.json
-/*
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "module": "commonjs",
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    /* Language and Environment */
+    "target": "ES2020",      /* Specify ECMAScript target version */
+    
+    /* Modules */
+    "module": "commonjs",    /* Specify module code generation */
+    
+    /* Emit */
+    "outDir": "./dist",      /* Specify an output folder for all emitted files */
+    "rootDir": "./src",      /* Specify the root directory of input files */
+    
+    /* Type Checking */
+    "strict": true,          /* Enable all strict type-checking options */
+    
+    /* Interop Constraints */
+    "esModuleInterop": true, /* Emit additional JavaScript to ease support for importing CommonJS modules */
+    "skipLibCheck": true,    /* Skip type checking of declaration files */
+    "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports */
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules"]
+  
+  /* Files Inclusion/Exclusion */
+  "include": ["src/**/*"],   /* Include all files in the src directory */
+  "exclude": ["node_modules"] /* Exclude the node_modules directory */
 }
-*/
+
 
