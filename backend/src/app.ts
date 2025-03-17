@@ -1,17 +1,39 @@
-// src/app.ts
-import express, { Application } from 'express';
+/**
+ * src/app.ts
+ * 
+ * This is the main application file that configures the Express application.
+ * It sets up middleware, routes, and error handling for the API.
+ */
+
+import express, { Application, Request, Response } from 'express';
 import learnerRoutes from './routes/learnerRoutes';
 
+/**
+ * Initialize Express application
+ */
 const app: Application = express();
 
-// Middleware
+/**
+ * Middleware Configuration
+ * 
+ * express.json() - Parses incoming requests with JSON payloads
+ */
 app.use(express.json());
 
-// Routes
+/**
+ * API Routes
+ * 
+ * Mount the learner routes under the /api/learners path
+ */
 app.use('/api/learners', learnerRoutes);
 
-// Basic error handling
-app.use((req, res) => {
+/**
+ * Error Handling Middleware
+ * 
+ * Catch-all for undefined routes
+ * Returns a 404 status with a standardized error response
+ */
+app.use((req: Request, res: Response) => {
   res.status(404).json({
     success: false,
     message: 'Route not found'
