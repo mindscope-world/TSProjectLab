@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # TypeScript Express API with Swagger Documentation
 
 This project is a TypeScript-based Express API that includes Swagger documentation for easy API exploration and testing.
@@ -81,11 +82,27 @@ The API includes the following endpoints:
 ### Test Endpoint
 - `GET /api/test` - Returns a test message with timestamp
 
-### User Management
-- `GET /api/users` - Get all users
-- `POST /api/users` - Create a new user
-- `POST /api/users/bulk` - Create multiple users
-- `DELETE /api/users/bulk` - Delete multiple users
+### Learner Management
+- `GET /api/learners` - Get all learners
+- `GET /api/learners/{id}` - Get a specific learner by ID
+- `POST /api/learners` - Create a new learner
+- `PUT /api/learners/{id}` - Update a learner's information
+- `DELETE /api/learners/{id}` - Delete a learner
+
+#### Learner Data Structure
+```typescript
+{
+  id: number;              // Auto-generated learner ID
+  name: string;           // Learner's full name
+  email: string;          // Learner's email address
+  course: string;         // Course the learner is enrolled in
+  enrollmentDate: string; // Date when the learner enrolled
+  status: 'active' | 'completed' | 'dropped'; // Current status
+  grade?: string;         // Final grade (if completed)
+  progress: number;       // Course completion percentage (0-100)
+  lastAccessed: string;   // Last access timestamp
+}
+```
 
 Each endpoint is documented in detail in the Swagger UI.
 
@@ -138,9 +155,17 @@ const swaggerOptions = {
   apis: ['./src/index.ts'], // Path to the API docs
 };
 ```
+
 ## Author
-Paul Ndirangu
+> Paul Ndirangu
 
 ## License
 
 This project is licensed under the MIT License. 
+=======
+# TSProjectLab
+
+## Features
+1. [FRONTEND] Fetch and Display learners via rest API.
+2. [BACKEND] Have an API endpoint that returns learners details in JSON format
+>>>>>>> origin/dev

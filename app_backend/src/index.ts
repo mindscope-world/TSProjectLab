@@ -2,6 +2,7 @@ import express, { Request, Response, Router, RequestHandler } from 'express';
 import cors from 'cors';
 import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
+import learnerRoutes from './routes/learnerRoutes';
 
 const app = express();
 const router = Router();
@@ -56,10 +57,60 @@ const swaggerOptions = {
     // Add CORS configuration to Swagger
     security: [],
     components: {
-      securitySchemes: {}
+      securitySchemes: {},
+      schemas: {
+        Learner: {
+          type: 'object',
+          required: ['name', 'email', 'course'],
+          properties: {
+            id: {
+              type: 'integer',
+              description: 'Auto-generated learner ID'
+            },
+            name: {
+              type: 'string',
+              description: 'Learner\'s full name'
+            },
+            email: {
+              type: 'string',
+              format: 'email',
+              description: 'Learner\'s email address'
+            },
+            course: {
+              type: 'string',
+              description: 'Course the learner is enrolled in'
+            },
+            enrollmentDate: {
+              type: 'string',
+              format: 'date-time',
+              description: 'Date when the learner enrolled'
+            },
+            status: {
+              type: 'string',
+              enum: ['active', 'completed', 'dropped'],
+              description: 'Current status of the learner'
+            },
+            grade: {
+              type: 'string',
+              description: 'Final grade (if course is completed)'
+            },
+            progress: {
+              type: 'number',
+              minimum: 0,
+              maximum: 100,
+              description: 'Percentage of course completion'
+            },
+            lastAccessed: {
+              type: 'string',
+              format: 'date-time',
+              description: 'Last time the learner accessed the course'
+            }
+          }
+        }
+      }
     }
   },
-  apis: ['./src/index.ts'], // Path to the API docs
+  apis: ['./src/index.ts', './src/routes/learnerRoutes.ts'], // Path to the API docs
 };
 
 const swaggerDocs = swaggerJsdoc(swaggerOptions);
@@ -380,6 +431,9 @@ router.delete('/users/bulk', deleteManyUsers);
 
 // Mount the router
 app.use('/api', router);
+
+// Routes
+app.use('/api/learners', learnerRoutes);
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
