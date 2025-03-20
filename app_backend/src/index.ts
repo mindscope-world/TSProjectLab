@@ -3,6 +3,7 @@ import cors from 'cors';
 import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import learnerRoutes from './routes/learnerRoutes';
+import { checkDataDirectory } from './utils/fileUtils';
 
 const app = express();
 const router = Router();
@@ -32,6 +33,9 @@ interface DeleteUsersRequest {
 }
 
 let users: User[] = [];
+
+// Check if data directory exists and has write permissions
+checkDataDirectory();
 
 // Add CORS middleware
 app.use(cors());
@@ -87,7 +91,7 @@ const swaggerOptions = {
             },
             status: {
               type: 'string',
-              enum: ['active', 'completed', 'dropped'],
+              enum: ['active', 'inactive', 'completed', 'dropped'],
               description: 'Current status of the learner'
             },
             grade: {
@@ -130,7 +134,7 @@ app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
  *               type: string
  */
 app.get('/', (req: Request, res: Response) => {
-  res.send('Hello, TypeScript Express!');
+  res.send('Hello, TypeScript Express API with Swagger Documentation!');
 });
 
 /**
@@ -438,4 +442,5 @@ app.use('/api/learners', learnerRoutes);
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
   console.log(`Swagger documentation available at http://localhost:${port}/docs`);
+  console.log(`API learners endpoint available at http://localhost:${port}/api/learners`);
 }); 

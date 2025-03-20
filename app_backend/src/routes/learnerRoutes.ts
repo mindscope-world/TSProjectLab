@@ -1,32 +1,74 @@
 import express, { Request, Response, Router, RequestHandler } from 'express';
 import { Learner } from '../interfaces/Learner';
+import { saveLearners, loadLearners } from '../utils/fileUtils';
 
 const router: Router = express.Router();
 
-// In-memory storage for learners (replace with database in production)
-let learners: Learner[] = [
+// Initial learners data
+const initialLearners: Learner[] = [
   {
-    id: 1,
-    name: "John Doe",
-    email: "john@example.com",
-    course: "TypeScript Fundamentals",
-    enrollmentDate: "2024-01-15",
-    status: "active",
-    progress: 75,
-    lastAccessed: "2024-03-20T10:30:00Z"
+    "id": 1,
+    "name": "Christine Mcguire",
+    "email": "scott60@example.org",
+    "course": "away",
+    "enrollmentDate": "2025-03-05T16:57:09.364295Z",
+    "status": "active",
+    "grade": "A",
+    "progress": 21,
+    "lastAccessed": "2025-03-04T14:41:58.257733Z"
   },
   {
-    id: 2,
-    name: "Jane Smith",
-    email: "jane@example.com",
-    course: "Advanced TypeScript",
-    enrollmentDate: "2024-02-01",
-    status: "completed",
-    grade: "A",
-    progress: 100,
-    lastAccessed: "2024-03-19T15:45:00Z"
+    "id": 2,
+    "name": "Dr. Kendra Hunt",
+    "email": "michaelbates@example.org",
+    "course": "decision",
+    "enrollmentDate": "2025-02-18T23:43:42.127360Z",
+    "status": "active",
+    "grade": "A",
+    "progress": 70,
+    "lastAccessed": "2025-03-03T14:41:58.258853Z"
+  },
+  {
+    "id": 3,
+    "name": "Jason Meadows",
+    "email": "steven54@example.net",
+    "course": "house",
+    "enrollmentDate": "2025-03-11T01:57:09.099616Z",
+    "status": "active",
+    "grade": "A",
+    "progress": 28,
+    "lastAccessed": "2025-02-21T14:41:58.259561Z"
+  },
+  {
+    "id": 4,
+    "name": "Jason Young",
+    "email": "nmorales@example.net",
+    "course": "impact",
+    "enrollmentDate": "2025-03-11T20:30:07.869440Z",
+    "status": "active",
+    "grade": "D",
+    "progress": 68,
+    "lastAccessed": "2025-03-12T14:41:58.260321Z"
+  },
+  {
+    "id": 5,
+    "name": "Sean Vasquez",
+    "email": "emily13@example.com",
+    "course": "analysis",
+    "enrollmentDate": "2025-02-04T06:24:24.730617Z",
+    "status": "active",
+    "grade": "A",
+    "progress": 78,
+    "lastAccessed": "2025-03-13T14:41:58.261152Z"
   }
 ];
+
+// Load learners from file or use initial data if file doesn't exist
+let learners: Learner[] = loadLearners();
+if (learners.length === 0) {
+  learners = initialLearners;
+  saveLearners(learners);
+}
 
 /**
  * @swagger
@@ -110,6 +152,7 @@ const createLearner: RequestHandler = (req, res): void => {
   };
   
   learners.push(newLearner);
+  saveLearners(learners);
   res.status(201).json(newLearner);
 };
 
@@ -154,6 +197,7 @@ const updateLearner: RequestHandler<{ id: string }> = (req, res): void => {
     lastAccessed: new Date().toISOString()
   };
   
+  saveLearners(learners);
   res.json(learners[index]);
 };
 
@@ -183,6 +227,7 @@ const deleteLearner: RequestHandler<{ id: string }> = (req, res): void => {
   }
   
   learners.splice(index, 1);
+  saveLearners(learners);
   res.json({ message: 'Learner deleted successfully' });
 };
 

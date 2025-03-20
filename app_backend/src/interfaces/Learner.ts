@@ -4,7 +4,7 @@ export interface Learner {
   email: string;
   course: string;
   enrollmentDate: string;
-  status: 'active' | 'completed' | 'dropped';
+  status: 'active' | 'inactive' | 'completed' | 'dropped';
   grade?: string;
   progress: number; // percentage of course completion
   lastAccessed: string;
